@@ -2,7 +2,9 @@
 
 
 def percent(part: float, total: float) -> float:
-    """Return part as a percentage of total."""
+    """Return part as a percentage of total, or 0.0 when total is 0."""
+    if total == 0:
+        return 0.0
     return part / total * 100
 
 
