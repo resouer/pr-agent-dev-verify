@@ -1,0 +1,22 @@
+name: PR Sidebar Required QA
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  required-failing-fixture:
+    name: Required failing fixture
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail on purpose
+        run: exit 1
+
+  optional-passing-fixture:
+    name: Optional passing fixture
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pass on purpose
+        run: exit 0
