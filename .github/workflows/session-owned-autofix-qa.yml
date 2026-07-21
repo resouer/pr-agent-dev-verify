@@ -12,4 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deterministic fixture result
-        run: exit 0
+        run: |
+          sleep 130
+          exit 1
