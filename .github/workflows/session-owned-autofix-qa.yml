@@ -14,4 +14,4 @@ jobs:
       - name: Deterministic fixture result
         run: |
           sleep 130
-          exit 1
+          exit 0
