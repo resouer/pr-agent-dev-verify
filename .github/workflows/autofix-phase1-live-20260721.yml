@@ -1,0 +1,15 @@
+name: Auto-fix Phase 1 Live QA
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  auto-fix-phase1-live-qa:
+    name: Auto-fix Phase 1 Live QA
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deterministic test result
+        run: exit 1
