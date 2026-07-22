@@ -1,0 +1,15 @@
+name: autofix-phase1-live-fresh-20260721
+
+on:
+  pull_request:
+
+jobs:
+  fresh-qa:
+    name: Auto-fix Phase 1 Fresh QA
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deterministic failing test
+        shell: bash
+        run: |
+          echo "Phase 1 fresh-session QA: deterministic failure"
+          exit 1
