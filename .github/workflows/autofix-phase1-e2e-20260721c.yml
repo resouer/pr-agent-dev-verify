@@ -1,0 +1,26 @@
+name: autofix-phase1-e2e-20260721c
+
+on:
+  pull_request:
+
+jobs:
+  fast-lint:
+    name: Auto-fix Fast Lint QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert lint state is green
+        run: test "$(cat .autofix-lint-state)" = "green"
+
+  long-e2e:
+    name: Auto-fix Long E2E QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hibernate while e2e state is red
+        run: |
+          if [ "$(cat .autofix-e2e-state)" = "red" ]; then
+            sleep 1020
+          fi
+      - name: Assert e2e state is green
+        run: test "$(cat .autofix-e2e-state)" = "green"
