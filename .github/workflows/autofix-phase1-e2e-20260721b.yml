@@ -1,0 +1,13 @@
+name: autofix-phase1-e2e-20260721b
+
+on:
+  pull_request:
+
+jobs:
+  qa:
+    name: Auto-fix Phase 1 E2E QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert QA state is green
+        run: test "$(cat .autofix-qa-state)" = "green"
