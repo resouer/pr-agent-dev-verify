@@ -1,0 +1,12 @@
+name: autofix-phase1-live-origin-20260721
+
+on:
+  pull_request:
+
+jobs:
+  qa:
+    name: Auto-fix Phase 1 Origin QA
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deterministic failing test
+        run: exit 1
