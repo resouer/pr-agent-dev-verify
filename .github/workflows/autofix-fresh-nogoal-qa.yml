@@ -1,0 +1,27 @@
+name: Auto-fix Fresh NoGoal QA
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  state-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify state file
+        run: |
+          STATE="$(tr -d '[:space:]' < .autofix-fresh-state)"
+          echo "Current state: '$STATE'"
+          if [ "$STATE" = "green" ]; then
+            echo "State is green — check passes."
+            exit 0
+          elif [ "$STATE" = "red" ]; then
+            echo "State is red — check fails."
+            exit 1
+          else
+            echo "Unexpected state '$STATE' — failing."
+            exit 1
+          fi
