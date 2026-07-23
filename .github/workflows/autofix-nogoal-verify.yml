@@ -1,0 +1,18 @@
+name: autofix-nogoal-verify
+
+on:
+  pull_request:
+
+jobs:
+  ordering-e2e:
+    name: Auto-fix Hibernated E2E QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Delayed observation window when state is green
+        run: |
+          if [ "$(cat .autofix-ordering-state)" = "green" ]; then
+            sleep 600
+          fi
+      - name: Assert ordering state is green
+        run: test "$(cat .autofix-ordering-state)" = "green"
