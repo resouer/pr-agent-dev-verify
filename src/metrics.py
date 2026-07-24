@@ -12,10 +12,12 @@ def moving_average(values, window):
     if window > len(values):
         return []
 
-    # TODO: this recomputes the sum over each window; a rolling sum that adds the
-    # incoming value and subtracts the outgoing one would make this O(n) instead
-    # of O(n * window). Optimize later.
-    averages = []
-    for i in range(len(values) - window + 1):
-        averages.append(sum(values[i:i + window]) / window)
+    # Rolling sum: seed with the first window, then slide by adding the incoming
+    # value and subtracting the outgoing one. This keeps the whole pass O(n)
+    # rather than recomputing each window's sum (O(n * window)).
+    window_sum = sum(values[:window])
+    averages = [window_sum / window]
+    for i in range(window, len(values)):
+        window_sum += values[i] - values[i - window]
+        averages.append(window_sum / window)
     return averages
