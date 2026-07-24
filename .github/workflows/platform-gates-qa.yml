@@ -1,0 +1,44 @@
+name: Platform Gates QA
+
+on:
+  pull_request:
+
+jobs:
+  gate:
+    name: ci-gate-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Readiness verdict
+        run: |
+          if [ ! -f docs/notes.md ]; then
+            echo "readiness: no docs/notes.md in this PR — nothing to gate."
+            exit 0
+          fi
+          if grep -q '^Reviewed-by:' docs/notes.md; then
+            echo "readiness: ready — docs/notes.md carries a Reviewed-by line."
+            exit 0
+          fi
+          echo "::error::PR readiness blocked (1 finding)"
+          echo "readiness finding [docs-attribution]: docs/notes.md must end with a 'Reviewed-by: <name>' line."
+          echo "To resolve: add a line starting with 'Reviewed-by:' to docs/notes.md and push."
+          exit 1
+
+  analyzer:
+    name: request-service-analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyzer verdict
+        run: |
+          if [ ! -f src/metrics.py ]; then
+            echo "analysis: no src/metrics.py — nothing to analyze."
+            exit 0
+          fi
+          if grep -q 'TODO' src/metrics.py; then
+            echo "::error::Code analysis blocked (1 finding)"
+            echo "analyzer finding [no-todo]: src/metrics.py contains a TODO marker; resolve it before merge."
+            exit 1
+          fi
+          echo "analysis: clean."
+          exit 0
