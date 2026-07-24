@@ -1,0 +1,24 @@
+name: Ordinary CI QA
+
+on:
+  pull_request:
+
+jobs:
+  build-check:
+    name: build-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build state
+        run: |
+          if [ ! -f .qa-ci-state ]; then
+            echo "no .qa-ci-state — build passes."
+            exit 0
+          fi
+          STATE="$(tr -d '[:space:]' < .qa-ci-state)"
+          echo "Build state: '$STATE'"
+          if [ "$STATE" = "green" ]; then
+            exit 0
+          fi
+          echo "::error::build failed: .qa-ci-state is '$STATE' — set it to 'green' once the build issue is resolved"
+          exit 1
