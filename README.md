@@ -26,3 +26,4 @@ position:
 from calc.calc import running_total
 running_total([1, 2, 3, 4])  # [1.0, 3.0, 6.0, 10.0]
 ```
+QA marker: panel TTL verification 2026-08-07 (202721)
