@@ -26,3 +26,5 @@ position:
 from calc.calc import running_total
 running_total([1, 2, 3, 4])  # [1.0, 3.0, 6.0, 10.0]
 ```
+
+<!-- Chip QA marker: 2026-08-08 disposable PR -->
