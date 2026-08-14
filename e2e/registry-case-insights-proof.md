@@ -6,3 +6,5 @@ the same registry entry.
 
 All names and examples here are synthetic and used only to confirm mixed-case
 repository resolution.
+
+A case-folded lookup for `CaseRepo` reaches the same canonical repository as `caserepo`.
