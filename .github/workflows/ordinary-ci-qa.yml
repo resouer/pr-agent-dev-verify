@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Hold for in-progress QA window
+        run: sleep 240
       - name: Build state
         run: |
           if [ ! -f .qa-ci-state ]; then
