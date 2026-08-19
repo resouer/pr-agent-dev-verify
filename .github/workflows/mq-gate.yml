@@ -1,0 +1,16 @@
+name: mq-gate
+on:
+  pull_request:
+  merge_group:
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pass on PR, hold on the merge queue
+        run: |
+          echo "event=${{ github.event_name }}"
+          if [ "${{ github.event_name }}" = "merge_group" ]; then
+            echo "Holding the merge-queue entry so its Queued state stays observable."
+            sleep 1800
+          fi
+          echo ok
