@@ -1,0 +1,26 @@
+name: Merge Queue Browser Verification
+
+on:
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  pull-request-ready:
+    if: github.event_name == 'pull_request'
+    name: queue-hold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Allow the pull request to enter the queue
+        run: echo "Pull request head is ready for merge queue verification."
+
+  merge-queue-hold:
+    if: github.event_name == 'merge_group'
+    name: queue-hold
+    environment: merge-queue-hold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release the merge group
+        run: echo "Merge queue verification hold released."
