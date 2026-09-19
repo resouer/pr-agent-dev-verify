@@ -1,3 +1,3 @@
 Line one.
-Line two
+Line two.
 Line three.
