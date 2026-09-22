@@ -7,3 +7,7 @@ def test_percent_basic():
 
 def test_running_total():
     assert running_total([1, 2, 3]) == [1.0, 3.0, 6.0]
+
+
+def test_running_total_empty():
+    assert running_total([]) == []
