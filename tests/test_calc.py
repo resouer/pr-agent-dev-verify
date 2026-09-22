@@ -10,4 +10,4 @@ def test_running_total():
 
 
 def test_running_total_empty():
-    assert running_total([]) == [999]
+    assert running_total([]) == []
